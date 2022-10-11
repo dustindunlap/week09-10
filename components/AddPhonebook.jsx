@@ -65,4 +65,4 @@ Add
 </Box>
 );
 };
-export default addPhonebook;
+export default AddPhonebook;
