@@ -40,7 +40,6 @@ setNumber("");
 toast({ title: "Contact added successfully", status: "success" });
 };
 
-
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">

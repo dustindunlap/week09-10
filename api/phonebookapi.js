@@ -6,6 +6,7 @@ updateDoc,
 doc,
 deleteDoc,
 } from "firebase/firestore";
+
 const addPhonebook = async ({ userId, name, number }) => {
 try {
 await addDoc(collection(db, "phonebook"), {
@@ -16,16 +17,7 @@ createdAt: new Date().getTime(),
 });
 } catch (err) {}
 };
-const togglePhonebookStatus = async ({ docId, status }) => {
-try {
-const PhonebookRef = doc(db, "phonebook", docId);
-await updateDoc(PhonebookRef, {
-status,
-});
-} catch (err) {
-console.log(err);
-}
-};
+
 const deletePhonebook = async (docId) => {
 try {
 const PhonebookRef = doc(db, "phonebook", docId);
@@ -34,4 +26,4 @@ await deleteDoc(PhonebookRef);
 console.log(err);
 }
 };
-export { addPhonebook, togglePhonebookStatus, deletePhonebook };
+export { addPhonebook, deletePhonebook };

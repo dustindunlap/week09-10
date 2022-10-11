@@ -11,7 +11,7 @@ import {
     import { collection, onSnapshot, query, where } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-    import { deletePhonebook, togglePhonebookStatus } from "../api/phonebookapi";
+    import { deletePhonebook } from "../api/phonebookapi";
     const PhonebookList = () => {
     const [contacts, setContacts] = React.useState([]);
     const {  user } = useAuth();
@@ -46,7 +46,7 @@ import {
     }, [user]);
     const handlePhonebookDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this contact?")) {
-    deleteContact(id);
+    deletePhonebook(id);
     toast({ title: "Contact deleted successfully", status: "success" });
     }
     };
