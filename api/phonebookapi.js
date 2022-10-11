@@ -6,12 +6,12 @@ updateDoc,
 doc,
 deleteDoc,
 } from "firebase/firestore";
-const addPhonebook = async ({ name, number, status }) => {
+const addPhonebook = async ({ userId, name, number }) => {
 try {
 await addDoc(collection(db, "phonebook"), {
+user: userId,
 name: name,
 number: number,
-status: status,
 createdAt: new Date().getTime(),
 });
 } catch (err) {}
