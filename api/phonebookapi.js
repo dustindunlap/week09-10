@@ -15,8 +15,19 @@ name: name,
 number: number,
 createdAt: new Date().getTime(),
 });
-} catch (err) {}
+} catch (err) {console.log("error adding doc")}
 };
+
+const updatePhonebook = async (docId) =>{
+    console.log(docId);
+try {
+    await updateDoc(doc(db, "phonebook", docId.id), {
+        name: docId.name,
+        number: docId.number,
+    });
+    } catch (err) 
+    {console.log(err)}
+}
 
 const deletePhonebook = async (docId) => {
 try {
@@ -26,4 +37,4 @@ await deleteDoc(PhonebookRef);
 console.log(err);
 }
 };
-export { addPhonebook, deletePhonebook };
+export { addPhonebook, deletePhonebook, updatePhonebook };

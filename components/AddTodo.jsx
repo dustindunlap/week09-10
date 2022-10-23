@@ -47,8 +47,9 @@ return (
 <Input
 placeholder="Title"
 value={title}
-onChange={(e) => setTitle(e.target.value)}
+onChange={(e) => console.log("gooble")}
 />
+{console.log(title)}
 <Textarea
 placeholder="Description"
 value={description}
@@ -71,7 +72,7 @@ Completed ✅
 <Button
 onClick={() => handleTodoCreate()}
 disabled={title.length < 1 || description.length < 1 || isLoading}
-variantColor="teal"
+variantcolor="teal"
 variant="solid"
 >
 Add

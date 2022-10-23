@@ -9,53 +9,53 @@ Select,
 useToast,
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
-import { addPhonebook } from "../api/phonebookapi";
-const AddPhonebook = () => {
+import { addEvent } from "../api/eventapi";
+const AddEvent = () => {
 const [name, setName] = React.useState("");
-const [number, setNumber] = React.useState("");
+const [date, setDate] = React.useState("");
 const [isLoading, setIsLoading] = React.useState(false);
 const toast = useToast();
 const { isLoggedIn, user } = useAuth();
 
-const handlePhonebookCreate = async () => {
+const handleEventCreate = async () => {
 if (!isLoggedIn) {
 toast({
-title: "You must be logged in to add a contact",
+title: "You must be logged in to add an event",
 status: "error",
 duration: 9000,
 isClosable: true,
 });
-return;
+return; 
 }
 setIsLoading(true);
-const phonebook = {
+const event = {
 name,
-number,
+date,
 userId: user.uid,
 };
-await addPhonebook(phonebook);
+await addEvent(event);
 setIsLoading(false);
 setName("");
-setNumber("");
-toast({ title: "Contact added successfully", status: "success" });
+setDate("");
+toast({ title: "Event added successfully", status: "success" });
 };
 
 return (
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
-placeholder="Name"
+placeholder="Event Name"
 value={name}
 onChange={(e) => setName(e.target.value)}
 />
 <Textarea
-placeholder="Number"
-value={number}
-onChange={(e) => setNumber(e.target.value)}
+placeholder="Event Date"
+value={date}
+onChange={(e) => setDate(e.target.value)}
 />
 <Button
-onClick={() => handlePhonebookCreate()}
-disabled={name.length < 1 || number.length < 1 || isLoading}
+onClick={() => handleEventCreate()}
+disabled={name.length < 1 || date.length < 1 || isLoading}
 variantcolor="teal"
 variant="solid"
 >
@@ -65,4 +65,4 @@ Add
 </Box>
 );
 };
-export default AddPhonebook;
+export default AddEvent;

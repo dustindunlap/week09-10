@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Link, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Button, Link, Text, useColorMode, Badge } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { auth } from "../firebase";
@@ -32,15 +32,18 @@ const credential = GoogleAuthProvider.credentialFromError(error);
 };
 return (
     <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Box>
-            <Link href="/add-todo">Add To Do</Link>
-        </Box>
-        <Box>
+        <Badge borderRadius='full' px='4' colorScheme='#EDF2F7' p='2'>
             <Link href="/">List All To Dos</Link>
-        </Box>
-        <Box>
+        </Badge>
+        <Badge borderRadius='full' px='4' colorScheme='#EDF2F7' p='2'>
+            <Link href="/add-todo">Add To Do</Link>
+        </Badge>
+        <Badge borderRadius='full' px='4' colorScheme='#EDF2F7' p='2'>
             <Link href="/phonebook">Phonebook</Link>
-        </Box>
+        </Badge>
+        <Badge borderRadius='full' px='4' colorScheme='#EDF2F7' p='2'>
+            <Link href="/events">Events</Link>
+        </Badge>
         <Box textAlign="right">
             
             <Button onClick={() => toggleColorMode()}>

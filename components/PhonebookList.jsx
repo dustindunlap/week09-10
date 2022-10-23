@@ -1,9 +1,11 @@
 import {
     Badge,
     Box,
+    Button,
     Heading,
     SimpleGrid,
     Text,
+    Input,
     useToast,
     } from "@chakra-ui/react";
     import React, { useEffect } from "react";
@@ -11,11 +13,14 @@ import {
     import { collection, onSnapshot, query, where } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-    import { deletePhonebook } from "../api/phonebookapi";
+    import { deletePhonebook, updatePhonebook } from "../api/phonebookapi";
     const PhonebookList = () => {
     const [contacts, setContacts] = React.useState([]);
     const {  user } = useAuth();
     const toast = useToast();
+    const [name, setName] = React.useState("");
+    const [number, setNumber] = React.useState("");
+
     /*const refreshData = () => {
     if (!user) {
     setTodos([]);
@@ -50,14 +55,25 @@ import {
     toast({ title: "Contact deleted successfully", status: "success" });
     }
     };
-    const handleToggle = async (id, status) => {
+    const handlePhonebookUpdate = async (id) => {
+        const contactx = {
+            id,
+            name,
+            number,
+        };
+        updatePhonebook(contactx);
+        toast({
+        title: `Contact updated.`
+    });
+    };
+    {/*const handleToggle = async (id, status) => {
     const newStatus = status == "completed" ? "pending" : "completed";
     await toggleContactStatus({ docId: id, status: newStatus });
     toast({
     title: `Contact marked ${newStatus}`,
     status: newStatus == "completed" ? "success" : "warning",
     });
-    };
+    };*/}
     return (
     <Box mt={5}>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
@@ -69,9 +85,10 @@ import {
     shadow={"dark-lg"}
     transition="0.2s"
     _hover={{ boxShadow: "sm" }}
+    key={contact.id}
     >
     <Heading as="h3" fontSize={"xl"}>
-    {contact.name}{" "}
+    
     <Badge
     color="red.500"
     bg="inherit"
@@ -81,12 +98,13 @@ import {
     transform: "scale(1.2)",
     }}
     float="right"
+    p="1"
     size="xs"
     onClick={() => handlePhonebookDelete(contact.id)}
     >
     <FaTrash />
     </Badge>
-    <Badge
+    {/*<Badge
     color={contact.status == "pending" ? "gray.500" : "green.500"}
     bg="inherit"
     transition={"0.2s"}
@@ -106,9 +124,30 @@ import {
     bg={contact.status == "pending" ? "yellow.500" : "green.500"}
     >
     {contact.status}
-    </Badge>
+    </Badge>*/}
+    <Input
+        placeholder={contact.name}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        mb="1"
+    />
     </Heading>
-    <Text>{contact.number}</Text>
+    <Input
+        placeholder={contact.number}
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        mb="1"
+    />
+    <Button
+    float="right"    
+    opacity="0.8"
+    disabled={name.length < 1 || number.length < 1}
+    variantcolor="teal"
+    variant="solid"
+    onClick= {() => handlePhonebookUpdate(contact.id)}
+    >
+        Update
+    </Button>
     </Box>
     ))}
     </SimpleGrid>

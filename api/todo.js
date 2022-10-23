@@ -17,6 +17,18 @@ createdAt: new Date().getTime(),
 });
 } catch (err) {}
 };
+
+const updateTodo = async (docId) =>{
+    console.log(docId);
+    try {
+        await updateDoc(doc(db, "todo", docId.id), {
+            title: docId.title,
+            description: docId.description,
+        });
+        } catch (err) 
+        {console.log(err)}
+    }
+
 const toggleTodoStatus = async ({ docId, status }) => {
 try {
 const todoRef = doc(db, "todo", docId);
@@ -35,4 +47,4 @@ await deleteDoc(todoRef);
 console.log(err);
 }
 };
-export { addTodo, toggleTodoStatus, deleteTodo };
+export { addTodo, toggleTodoStatus, deleteTodo, updateTodo };

@@ -4,7 +4,7 @@ import Auth from "../components/Auth";
 
 export default function AddToDo() {
 return (
-<Container maxW="7xl">
+<Container maxW="container.xl" py="30vh" px="5">
 <Auth />
 <AddTodo />
 </Container>
